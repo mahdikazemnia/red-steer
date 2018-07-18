@@ -1,6 +1,6 @@
 const V2D = require('vectors-2d');
 const Mover = require('./Mover.js');
-const Circle = require('./Circle.Obstacle.js');
+const Circle = require('./Obstacles/Circle.js');
 
 class Map {
 
