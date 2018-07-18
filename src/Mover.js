@@ -12,6 +12,27 @@ class Mover {
         this.chain = chain;
         this.chain.movers.push(this.info);
 
+        // position
+        this.position = new V2D(settings.position);
+
+        // radius (size)
+        this.radius = settings.radius;
+
+        // add referenced values to the chain
+        this.info.position = this.position;
+
+    }
+
+    // ---------------------------------------
+    //          getters and setters
+    // ---------------------------------------
+
+    get radius() {
+        return this._radius;
+    }
+
+    set radius(param) {
+        this.info.radius = this._radius = param;
     }
 
 
