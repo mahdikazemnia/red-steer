@@ -22,6 +22,18 @@ class Circle {
 
     }
 
+    // ---------------------------------------
+    //          getters and setters
+    // ---------------------------------------
+
+    get radius() {
+        return this._radius;
+    }
+
+    set radius(param) {
+        this.info.radius = this._radius = param;
+    }
+    
 }
 
 module.exports = Circle;
