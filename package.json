@@ -20,5 +20,8 @@
   "bugs": {
     "url": "https://github.com/mehdikazemnia/red-steer/issues"
   },
-  "homepage": "https://github.com/mehdikazemnia/red-steer#readme"
+  "homepage": "https://github.com/mehdikazemnia/red-steer#readme",
+  "dependencies": {
+    "vectors-2d": "^1.1.1"
+  }
 }
