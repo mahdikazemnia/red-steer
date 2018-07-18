@@ -1,0 +1,24 @@
+{
+  "name": "red-steer",
+  "version": "0.0.0",
+  "description": "normal steering behaviors",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mehdikazemnia/red-steer.git"
+  },
+  "keywords": [
+    "steer",
+    "path",
+    "2d"
+  ],
+  "author": "Mehdi Kazemnia",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/mehdikazemnia/red-steer/issues"
+  },
+  "homepage": "https://github.com/mehdikazemnia/red-steer#readme"
+}
