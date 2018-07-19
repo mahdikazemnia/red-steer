@@ -19,6 +19,9 @@ class Mover {
         this.currentVelocity = new V2D(0, 0);
         this.desiredVelocity = new V2D(0, 0);
 
+        // ratios
+        this.seekRatio = settings.seekRatio || 1;
+
         // radius (size)
         this.radius = settings.radius;
 
@@ -37,6 +40,19 @@ class Mover {
 
     set radius(param) {
         this.info.radius = this._radius = param;
+    }
+
+    // ---------------------------------------
+    //              calculators
+    // ---------------------------------------
+
+    /**
+     * calculate's and return's the seek force
+     * @param {V2D} point the point to seek
+     * @returns {V2D} force
+    */
+    calcSeekForce(point) {
+        return point.clone().subtract(this.position).resize(this.seekRatio);
     }
 
 
