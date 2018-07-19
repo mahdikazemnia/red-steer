@@ -15,6 +15,10 @@ class Mover {
         // position
         this.position = new V2D(settings.position);
 
+        // velocities
+        this.currentVelocity = new V2D(0, 0);
+        this.desiredVelocity = new V2D(0, 0);
+
         // radius (size)
         this.radius = settings.radius;
 
