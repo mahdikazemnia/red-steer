@@ -51,11 +51,11 @@ class Mover {
      * @param {V2D} point the point to seek
      * @returns {V2D} force
     */
-    calcSeekForce(point) {
+    seek(point) {
         return point.clone().subtract(this.position).resize(this.seekRatio);
     }
 
 
-}
+ }
 
 module.exports = Mover;
