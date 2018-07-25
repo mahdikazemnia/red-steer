@@ -22,6 +22,6 @@
   },
   "homepage": "https://github.com/mehdikazemnia/red-steer#readme",
   "dependencies": {
-    "vectors-2d": "^1.1.1"
+    "vectors-2d": "^1.1.2"
   }
 }
