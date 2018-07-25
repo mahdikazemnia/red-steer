@@ -50,7 +50,7 @@ class Mover {
     // ---------------------------------------
 
     /**
-     * calculate's and return's the seek force
+     * calculates and returns the seek force
      * @param {V2D} point the point to seek
     */
     seek(point) {
@@ -58,8 +58,8 @@ class Mover {
     }
 
     /**
-     * calculate's and modifies steerForce based on desiredVelocity and currentVelocity
-     * update's currentVelocity based on steerForce
+     * calculates and modifies steerForce based on desiredVelocity and currentVelocity
+     * updates currentVelocity based on steerForce
      */
     steer() {
         let steerForce = this.desiredVelocity.clone().subtract(this.currentVelocity).limit(0, this.maxForce).divideSize(this.mass);
@@ -71,7 +71,7 @@ class Mover {
     // ---------------------------------------
 
     /**
-     * take's a step toward point, by now just considering seek force
+     * takes a step toward point, by now just considering seek force
      * @param {V2D} point 
      * @return {Object} contains the new position {x,y}
      */
@@ -81,7 +81,7 @@ class Mover {
         this.desiredVelocity.reset(0, 0);
 
         // seek the point
-        this.seek();
+        this.seek(point);
 
         // steer (update the currentVelocity)
         this.steer();
