@@ -56,6 +56,23 @@ class Mover {
     }
 
 
- }
+    // ---------------------------------------
+    //                steppers
+    // ---------------------------------------
+
+    /**
+     * take's a step toward point, by now just considering seek force
+     * @param {V2D} point 
+     * @return {Object} contains the new position {x,y}
+     */
+    stepToward(point) {
+        // TODO: seek the point
+        // TODO: avoid obstacles in the map
+        // TODO: decrease the speed when near
+        // TODO: return true when reached        
+    }
+
+
+}
 
 module.exports = Mover;
