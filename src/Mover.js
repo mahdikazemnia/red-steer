@@ -52,7 +52,6 @@ class Mover {
     /**
      * calculate's and return's the seek force
      * @param {V2D} point the point to seek
-     * @returns {V2D} force
     */
     seek(point) {
         this.desiredVelocity.add(point.clone().subtract(this.position).resize(this.seekRatio));
