@@ -21,6 +21,9 @@ class Mover {
 
         // ratios
         this.seekRatio = settings.seekRatio || 1;
+        this.maxVelocity = 10; // for now
+        this.maxForce = 2; // for now
+        this.mass = 1; // for now
 
         // radius (size)
         this.radius = settings.radius;
@@ -52,9 +55,17 @@ class Mover {
      * @returns {V2D} force
     */
     seek(point) {
-        return point.clone().subtract(this.position).resize(this.seekRatio);
+        this.desiredVelocity.add(point.clone().subtract(this.position).resize(this.seekRatio));
     }
 
+    /**
+     * calculate's and modifies steerForce based on desiredVelocity and currentVelocity
+     * update's currentVelocity based on steerForce
+     */
+    steer() {
+        let steerForce = this.desiredVelocity.clone().subtract(this.currentVelocity).limit(0, this.maxForce).divideSize(this.mass);
+        this.currentVelocity.add(steerForce).limit(0, this.maxVelocity);
+    }
 
     // ---------------------------------------
     //                steppers
@@ -66,7 +77,17 @@ class Mover {
      * @return {Object} contains the new position {x,y}
      */
     stepToward(point) {
-        // TODO: seek the point
+
+        // reset the desired velocity to the seek force
+        this.desiredVelocity.reset(0, 0);
+
+        // seek the point
+        this.seek();
+
+        // steer (update the currentVelocity)
+        this.steer();
+
+        
         // TODO: avoid obstacles in the map
         // TODO: decrease the speed when near
         // TODO: return true when reached        
