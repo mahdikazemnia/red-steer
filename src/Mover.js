@@ -82,30 +82,35 @@ class Mover {
     // ---------------------------------------
 
     /**
-     * takes a step toward point, by now just considering seek force
-     * @param {V2D} point 
-     * @return {Object} contains the new position {x,y}
+     * major step method
+     * takes a step based on settings
+     * @param {Object} settings {scenario, ...}
      */
-    stepToward(point) {
+    step(settings) {
 
-        // reset the desired velocity to the seek force
+        // reset the desiredVelocity
         this.desiredVelocity.reset(0, 0);
 
-        // seek the point
-        this.seek(point);
+        // seek ? seek the point, avoid obstacles
+        if (settings.scenario === 'seekAndAvoid') {
+            this.seekAndAvoid(settings.point);
+        }
 
-        // steer (update the currentVelocity)
+        // update the currentVelocity
         this.steer();
 
+        // take the step and return the new position        
+        return this.position.add(this.currentVelocity);
 
-        // move
-        this.position.add(this.currentVelocity);
+    }
 
-        return this.position;
-
-        // TODO: avoid obstacles in the map
-        // TODO: decrease the speed when near
-        // TODO: return false when reached        
+    /**
+     * calculates seek and avoid forces
+     * @param {V2D} point - point to seek
+     */
+    seekAndAvoid(point) {
+        this.seek(point); // seek the point
+        // TODO: avoid
     }
 
 
