@@ -20,10 +20,10 @@ class Mover {
         this.desiredVelocity = new V2D(0, 0);
 
         // ratios
-        this.seekRatio = settings.seekRatio || 1;
-        this.maxVelocity = 10; // for now
-        this.maxForce = 2; // for now
-        this.mass = 1; // for now
+        this.seekRatio = settings.seekRatio || 5;
+        this.maxVelocity = 100; // for now
+        this.maxForce = 5; // for now
+        this.mass = 10; // for now
 
         // radius (size)
         this.radius = settings.radius;
@@ -86,10 +86,15 @@ class Mover {
         // steer (update the currentVelocity)
         this.steer();
 
-        
+
+        // move
+        this.position.add(this.currentVelocity);
+
+        return this.position;
+
         // TODO: avoid obstacles in the map
         // TODO: decrease the speed when near
-        // TODO: return true when reached        
+        // TODO: return false when reached        
     }
 
 
