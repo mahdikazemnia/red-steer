@@ -21,6 +21,7 @@ class Mover {
 
         // ratios
         this.seekRatio = settings.seekRatio || 5;
+        this.fleeRatio = settings.fleeRatio || 5;
         this.maxVelocity = 100; // for now
         this.maxForce = 5; // for now
 
@@ -54,6 +55,14 @@ class Mover {
     */
     seek(point) {
         this.desiredVelocity.add(point.clone().subtract(this.position).resize(this.seekRatio));
+    }
+
+    /**
+     * calculates and adds the flee force to desiredVelocity
+     * @param {V2D} point the point to flee from
+    */
+    flee(point) {
+        this.desiredVelocity.add(this.position.clone().subtract(point).resize(this.fleeRatio));
     }
 
     /**
@@ -94,6 +103,8 @@ class Mover {
         // seek ? seek the point, avoid obstacles
         if (settings.scenario === 'seekAndAvoid') {
             this.seekAndAvoid(settings.point);
+        } else if (settings.scenario === 'fleeAndAvoid') {
+            this.fleeAndAvoid(settings.point);
         }
 
         // update the currentVelocity
@@ -110,6 +121,15 @@ class Mover {
      */
     seekAndAvoid(point) {
         this.seek(point); // seek the point
+        // TODO: avoid
+    }
+
+    /**
+     * calculates flee and avoid forces
+     * @param {V2D} point - point to flee from
+     */
+    fleeAndAvoid(point) {
+        this.flee(point); // flee from the point
         // TODO: avoid
     }
 
