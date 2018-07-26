@@ -102,7 +102,7 @@ class Mover {
 
         // seek ? seek the point, avoid obstacles
         if (settings.scenario === 'seekAndAvoid') {
-            this.seekAndAvoid(settings.point);
+            this.seekAndAvoid(settings.point, settings.slowingRadius);
         } else if (settings.scenario === 'fleeAndAvoid') {
             this.fleeAndAvoid(settings.point);
         }
@@ -119,9 +119,16 @@ class Mover {
      * calculates seek and avoid forces
      * @param {V2D} point - point to seek
      */
-    seekAndAvoid(point) {
+    seekAndAvoid(point, slowingRadius) {
         this.seek(point); // seek the point
+        
         // TODO: avoid
+
+        let distance = this.position.distanceTo(point);
+        if (distance < slowingRadius) { // in slowing radius
+            this.desiredVelocity.multiply(distance / slowingRadius);
+        }
+
     }
 
     /**
