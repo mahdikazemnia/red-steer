@@ -23,7 +23,6 @@ class Mover {
         this.seekRatio = settings.seekRatio || 5;
         this.maxVelocity = 100; // for now
         this.maxForce = 5; // for now
-        this.mass = 10; // for now
 
         // radius (size)
         this.radius = settings.radius;
@@ -50,7 +49,7 @@ class Mover {
     // ---------------------------------------
 
     /**
-     * calculates and returns the seek force
+     * calculates and adds the seek force to desiredVelocity
      * @param {V2D} point the point to seek
     */
     seek(point) {
@@ -58,12 +57,24 @@ class Mover {
     }
 
     /**
-     * calculates and modifies steerForce based on desiredVelocity and currentVelocity
-     * updates currentVelocity based on steerForce
+     * limits desiredVelocity
+     * calculates and limits steerForce 
+     * modifies and limits currentVelocity
      */
     steer() {
-        let steerForce = this.desiredVelocity.clone().subtract(this.currentVelocity).limit(0, this.maxForce).divideSize(this.mass);
-        this.currentVelocity.add(steerForce).limit(0, this.maxVelocity);
+        // limit desiredVelocity
+        this.desiredVelocity.limit(0, this.maxVelocity);
+
+        // calculate and limit steerForce
+        let steerForce = this.desiredVelocity
+            .clone()
+            .subtract(this.currentVelocity)
+            .limit(0, this.maxForce);
+
+        // modify and limit currentVelocity
+        this.currentVelocity
+            .add(steerForce)
+            .limit(0, this.maxVelocity);
     }
 
     // ---------------------------------------
