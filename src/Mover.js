@@ -20,10 +20,10 @@ class Mover {
         this.desiredVelocity = new V2D(0, 0);
 
         // ratios
-        this.seekRatio = settings.seekRatio || 5;
-        this.fleeRatio = settings.fleeRatio || 5;
-        this.maxVelocity = 100; // for now
-        this.maxForce = 5; // for now
+        this.seekRatio = settings.seekRatio || 10;
+        this.fleeRatio = settings.fleeRatio || 10;
+        this.maxVelocity = settings.maxVelocity || 10;
+        this.maxForce = settings.maxForce || 3;
 
         // radius (size)
         this.radius = settings.radius;
@@ -121,7 +121,7 @@ class Mover {
      */
     seekAndAvoid(point, slowingRadius) {
         this.seek(point); // seek the point
-        
+
         // TODO: avoid
 
         let distance = this.position.distanceTo(point);
