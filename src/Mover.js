@@ -102,7 +102,7 @@ class Mover {
 
         // seek ? seek the point, avoid obstacles
         if (settings.scenario === 'seekAndAvoid') {
-            this.seekAndAvoid(settings.point, settings.slowingRadius);
+            this.seekAndAvoid(new V2D(settings.point), settings.slowingRadius);
         } else if (settings.scenario === 'fleeAndAvoid') {
             this.fleeAndAvoid(settings.point);
         }
