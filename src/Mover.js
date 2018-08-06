@@ -2,15 +2,7 @@ const V2D = require('vectors-2d');
 
 class Mover {
 
-    constructor(settings, chain) {
-
-        // info object to share with the chain
-        this.info = {};
-        this.info.id = chain.movers.length;
-
-        // join the chain
-        this.chain = chain;
-        this.chain.movers.push(this.info);
+    constructor(settings) {
 
         // position
         this.position = new V2D(settings.position);
@@ -19,18 +11,32 @@ class Mover {
         this.currentVelocity = new V2D(0, 0);
         this.desiredVelocity = new V2D(0, 0);
 
+        // radius (size)
+        this.radius = settings.radius;
+
         // ratios
         this.seekRatio = settings.seekRatio || 10;
         this.fleeRatio = settings.fleeRatio || 10;
         this.maxVelocity = settings.maxVelocity || 10;
         this.maxForce = settings.maxForce || 3;
 
-        // radius (size)
-        this.radius = settings.radius;
+    }
 
-        // add referenced values to the chain
-        this.info.position = this.position;
+    /**
+     * joins the mover to the chain
+     * @param {Object} chain 
+     */
+    join(chain) {
+        // info object to share with the chain
+        this.info = {
+            id: chain.movers.length,
+            position: this.position,
+            radius: this._radius
+        };
 
+        // join the chain
+        this.chain = chain;
+        this.chain.movers.push(this.info);
     }
 
     // ---------------------------------------
@@ -42,7 +48,8 @@ class Mover {
     }
 
     set radius(param) {
-        this.info.radius = this._radius = param;
+        if (this.info) this.info.radius = this._radius = param;
+        else this._radius = param;
     }
 
     // ---------------------------------------
