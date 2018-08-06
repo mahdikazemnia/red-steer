@@ -23,7 +23,7 @@ class Map {
 
 
     /**
-     * make's a new mover and automatically add's it to the chain
+     * makes a new mover and automatically adds it to the chain
      * @param {Object} settings 
      */
     makeMover(settings) {
@@ -31,7 +31,7 @@ class Map {
     }
 
     /**
-       * make's a new obstacle and automatically add's it to the chain
+       * makes a new obstacle and automatically adds it to the chain
        * @param {Object} settings 
        */
     makeObstacle(settings) {
