@@ -2,14 +2,7 @@ const V2D = require('vectors-2d');
 
 class Circle {
 
-    constructor(settings, chain) {
-
-        // join the chain
-        this.info = {};
-        this.info.id = chain.obstacles.length;
-        this.info.type = 'Circle';
-        this.chain = chain;
-        this.chain.obstacles.push(this.info);
+    constructor(settings) {
 
         // position
         this.position = new V2D(settings.position);
@@ -22,6 +15,24 @@ class Circle {
 
     }
 
+    /**
+     * joins the obstacle to the chain
+     * @param {Object} chain 
+    */
+    join(chain) {
+        // join the chain
+        this.info = {
+            id: chain.obstacles.length,
+            type: 'Circle',
+            position: this.position,
+            radius: this._radius
+        };
+
+        // join the chain
+        this.chain = chain;
+        this.chain.movers.push(this.info);
+    }
+
     // ---------------------------------------
     //          getters and setters
     // ---------------------------------------
@@ -31,9 +42,10 @@ class Circle {
     }
 
     set radius(param) {
-        this.info.radius = this._radius = param;
+        if (this.info) this.info.radius = this._radius = param;
+        else this._radius = param;
     }
-    
+
 }
 
 module.exports = Circle;
