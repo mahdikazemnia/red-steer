@@ -18,32 +18,47 @@ class Map {
 
         // set the size ([width,height])
         this.size = this.chain.map.size = settings.size;
-
     }
 
 
     /**
      * makes a new mover and automatically adds it to the chain
      * @param {Object} settings 
+     * @returns {Mover}
      */
     makeMover(settings) {
-        return new Mover(settings, this.chain);
+        let mover = new Mover(settings);
+        this.append(mover);
+        return mover;
     }
 
     /**
-       * makes a new obstacle and automatically adds it to the chain
-       * @param {Object} settings 
-       */
+     * makes a new obstacle and automatically adds it to the chain
+     * @param {Object} settings 
+     * @returns {Mover}
+     */
     makeObstacle(settings) {
 
         // obstacle type
         let type = settings.type;
+        let obstacle;
 
         if (type == 'Circle') { // Circle
-            return new Circle(settings, this.chain);
+            obstacle = new Circle(settings, this.chain);
         }
         // TODO: add other obstacle types
 
+        this.append(obstacle);
+        return obstacle;
+    }
+
+    /**
+     * appends the given object to the chain - obj must be either a mover or an obstacle
+     * @param {Mover|Circle|...}  
+     * @returns {...} whatever you've passed
+     */
+    append(obj) {
+        obj.join(this.chain);
     }
 
 }
