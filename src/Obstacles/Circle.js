@@ -10,9 +10,6 @@ class Circle {
         // radius
         this.radius = settings.radius;
 
-        // attach referencable share info (objects)
-        this.info.position = this.position;
-
     }
 
     /**
